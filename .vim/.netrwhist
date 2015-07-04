@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/home/tso/pyquick/google-python-exercises/babynames/solution'
+let g:netrw_dirhist_2='/home/tso/pyquick'
+let g:netrw_dirhist_3='/home/tso/pyquick/google-python-exercises'
+let g:netrw_dirhist_4='/home/tso/pyquick/google-python-exercises/babynames'
+let g:netrw_dirhist_5='/home/tso'
+let g:netrw_dirhist_6='/home/tso/lolbot/src'
+let g:netrw_dirhist_7='/home/tso/deathratio'

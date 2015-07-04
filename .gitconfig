@@ -1,0 +1,7 @@
+[user]
+	name = tso
+	email = tso@teknik.io
+[push]
+	default = simple
+[color]
+	ui = true
