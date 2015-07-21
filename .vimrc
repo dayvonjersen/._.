@@ -59,8 +59,8 @@ endif
 
 set directory=.,$TEMP
 
-colorscheme Revolution 
-set guifont=Inconsolata\ 11
+colorscheme liquidcarbon 
+set guifont=ProFontWindows\ 9
 set guioptions-=T 
 
 set expandtab

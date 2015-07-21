@@ -117,6 +117,7 @@ alias lampstat="sudo service apache2 status; sudo service mysql status"
 alias gitlog="git log --pretty=format:'%h %ar %s'"
 alias gitstatus="git status -s"
 alias gitignore="git ls-files --other --exclude-standard >> .gitignore"
+#alias gitall="for b in `git branch -r | grep -v -- '->'`; do git branch --track ${b##origin/} $b; done git remote update; git fetch --all"
 
 lint ()
 {
@@ -184,3 +185,5 @@ localfox() {
 /opt/firefox/firefox-bin http://[::1]/$1 &
 }
 alias firefox="/opt/firefox/firefox-bin"
+
+export GOPATH="/home/tso/gocode"
