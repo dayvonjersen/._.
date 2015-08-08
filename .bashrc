@@ -94,8 +94,8 @@ alias tgz='tar -czvf'
 alias dbeaver='/usr/share/dbeaver/dbeaver'
 
 # windows filesharing
-alias winfs="sudo mount.cifs //192.168.1.2/Music /home/tso/Desktop/Music -o user=Leek"
-alias winfs2="sudo mount.cifs //192.168.1.2/testshare /home/tso/testshare -o user=Leek"
+alias winfs="sudo mount.cifs //Onion-PC/Music /home/tso/Desktop/Music -o user=Leek"
+alias winfs2="sudo mount.cifs //Onion-PC/testshare /home/tso/testshare -o user=Leek"
 
 # devshit
 #alias gitcommit="git add .; git commit -m 'k'"
