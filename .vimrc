@@ -9,6 +9,7 @@ set incsearch
 map Q gq
 
 inoremap <C-U> <C-G>u<C-U>
+nnoremap <F6> :let @/ = ""<CR>
 
 if has('mouse')
 	set mouse=a
