@@ -1,3 +1,6 @@
+"nvim
+set clipboard+=unnamedplus
+
 set nocompatible
 set nobackup
 set backspace=indent,eol,start
@@ -60,7 +63,7 @@ endif
 
 set directory=.,$TEMP
 
-colorscheme liquidcarbon 
+colorscheme coffee 
 set guifont=ProFontWindows\ 9
 set guioptions-=T 
 
@@ -134,8 +137,8 @@ if !has("unix")
 endif
 
 " CTRL-Z is Undo; not in cmdline though
-noremap <C-Z> u
-inoremap <C-Z> <C-O>u
+"noremap <C-Z> u
+"inoremap <C-Z> <C-O>u
 
 " CTRL-Y is Redo (although not repeat); not in cmdline though
 noremap <C-Y> <C-R>
