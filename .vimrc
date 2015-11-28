@@ -63,7 +63,8 @@ endif
 
 set directory=.,$TEMP
 
-colorscheme coffee 
+colorscheme PaperColor
+set background=dark
 set guifont=ProFontWindows\ 9
 set guioptions-=T 
 
@@ -301,6 +302,9 @@ map <C-t> :tabnew
 " Folding
 " Note: should probably move this to ftplugin...
 syntax on
+filetype on
+au BufNewFile,BufRead *.phpt set filetype=php
+
 set foldmethod=syntax
 let g:php_folding=2
 set foldlevelstart=20

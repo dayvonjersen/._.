@@ -99,8 +99,8 @@ alias tgz='tar -czvf'
 alias dbeaver='/usr/share/dbeaver/dbeaver'
 
 # windows filesharing
-alias winfs="sudo mount.cifs //192.168.1.202/Music /home/tso/Desktop/Music -o user=Leek"
-alias winfs2="sudo mount.cifs //192.168.1.202/testshare /home/tso/testshare -o user=Leek"
+alias winfs="sudo mount.cifs //onion-pc/Music /home/tso/Desktop/Music -o user=Leek"
+alias winfs2="sudo mount.cifs //onion-pc/testshare /home/tso/testshare -o user=Leek"
 
 # devshit
 #alias gitcommit="git add .; git commit -m 'k'"
@@ -114,6 +114,13 @@ else
 	git commit -m "k"
 fi
 }
+
+gitfetch()
+{
+git branch -a | grep -v HEAD | perl -ne 'chomp($_); s|^\*?\s*||; if (m|(.+)/(.+)| && not $d{$2}) {print qq(git branch --track $2 $1/$2\n)} else {$d{$_}=1}' | csh -xfs
+git fetch --all
+}
+
 alias build="./build.sh --quick"
 alias lamp="sudo service apache2 start; sudo service mysql start"
 alias unlamp="sudo service apache2 stop; sudo service mysql stop"
@@ -3013,3 +3020,7 @@ __git_complete gitk __gitk_main
 if [ Cygwin = "$(uname -o 2>/dev/null)" ]; then
 __git_complete git.exe __git_main
 fi
+
+export NVM_DIR="/home/tso/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+export PATH=$PATH:~/.rakudobrew/bin
