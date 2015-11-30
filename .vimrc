@@ -182,14 +182,14 @@ endif
 " ol
 "command -nargs=0 -range=% OrderedList <line1>,<line2>s/^\s*\zs/\=(line('.') - <line1>+1).'. '
 
-noremap <MiddleMouse> ""
-noremap! <MiddleMouse> <Esc>
-noremap <2-MiddleMouse> ""
-noremap! <2-MiddleMouse> <Esc>
-noremap <3-MiddleMouse> ""
-noremap! <3-MiddleMouse> <Esc>
-noremap <4-MiddleMouse> ""
-noremap! <4-MiddleMouse> <Esc>
+"noremap <MiddleMouse> ""
+"noremap! <MiddleMouse> <Esc>
+"noremap <2-MiddleMouse> ""
+"noremap! <2-MiddleMouse> <Esc>
+"noremap <3-MiddleMouse> ""
+"noremap! <3-MiddleMouse> <Esc>
+"noremap <4-MiddleMouse> ""
+"noremap! <4-MiddleMouse> <Esc>
 
 " Typing on a Thinkpad is hard.
 map <F1> <Esc>
@@ -252,15 +252,15 @@ endfunction
 command! -range=% FormatXML <line1>,<line2>call DoFormatXML()
 
 nmap <silent> <leader>x :%FormatXML<CR>
-vmap <silent> <leader>x :FormatXML<CR>
+"vmap <silent> <leader>x :FormatXML<CR>
 
 " Visual Mode Navigation
-vmap <S-Left> h
-vmap <S-Down> j
-vmap <S-Up> k
-vmap <S-Right> l
-vmap <S-Home> 0
-vmap <S-End> $
+"vmap <S-Left> h
+"vmap <S-Down> j
+"vmap <S-Up> k
+"vmap <S-Right> l
+"vmap <S-Home> 0
+"vmap <S-End> $
 " These are broken for some reason
 map <PageUp> <C-b>
 map <PgDown> <C-f>
