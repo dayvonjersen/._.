@@ -13,3 +13,5 @@
     cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 [core]
     editor = nvim
+	quotepath = false
+	excludesfile = /home/tso/.gitignore
