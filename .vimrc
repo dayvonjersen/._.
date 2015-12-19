@@ -1,5 +1,7 @@
 "nvim
 set clipboard+=unnamedplus
+au FileChangedShell,InsertEnter,InsertLeave,FocusGained,BufEnter * :silent! !
+set autoread
 
 set nocompatible
 set nobackup
