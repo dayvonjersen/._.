@@ -1,152 +1,10 @@
-if [ $TERM == "linux" ]; then
-    export TERM="fbterm"
-fi
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
-
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
       *) return;;
 esac
 
-# don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
-HISTCONTROL=ignoreboth
-
-# append to the history file, don't overwrite it
-shopt -s histappend
-
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
-HISTIGNORE="clear:cls:history"
-
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-shopt -s checkwinsize
-
-# If set, the pattern "**" used in a pathname expansion context will
-# match all files and zero or more directories and subdirectories.
-#shopt -s globstar
-
-# make less more friendly for non-text input files, see lesspipe(1)
-#[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
-
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color) color_prompt=yes;;
-esac
-
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-#force_color_prompt=yes
-
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
-    else
-	color_prompt=
-    fi
-fi
-
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
-unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
-
-# enable color support of ls and also add handy aliases
-#if [ -x /usr/bin/dircolors ]; then
-#    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-#    alias ls='ls --color=always'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    #alias grep='grep --color=auto'
-    #alias fgrep='fgrep --color=auto'
-    #alias egrep='egrep --color=auto'
-#fi
-
-alias ls='ls --color=always'
-# some more ls aliases
-#alias ll='ls -l'
-#alias la='ls -A'
-#alias l='ls -CF'
-alias untar='tar -xvf'
-alias untgz='tar -xzvf'
-alias tgz='tar -czvf'
-alias dbeaver='/usr/share/dbeaver/dbeaver'
-
-# windows filesharing
-alias winfs="sudo mount.cifs //onion-pc/Music /home/tso/Desktop/Music -o user=Leek"
-alias winfs2="sudo mount.cifs //onion-pc/testshare /home/tso/testshare -o user=Leek"
-
-# devshit
-#alias gitcommit="git add .; git commit -m 'k'"
-gitcommit ()
-{
-git add .
-if [[ $1 ]]; then
-    msg=$(echo $@)
-	git commit -m "$msg"
-else
-	git commit -m "k"
-fi
-}
-
-gitfetch()
-{
-git branch -a | grep -v HEAD | perl -ne 'chomp($_); s|^\*?\s*||; if (m|(.+)/(.+)| && not $d{$2}) {print qq(git branch --track $2 $1/$2\n)} else {$d{$_}=1}' | csh -xfs
-git fetch --all
-}
-
-alias build="./build.sh --quick"
-alias lamp="sudo service apache2 start; sudo service mysql start"
-alias unlamp="sudo service apache2 stop; sudo service mysql stop"
-alias relamp="sudo service apache2 restart;"
-# sudo service mysql restart"
-alias lampstat="sudo service apache2 status; sudo service mysql status"
-alias gitlog="git log --pretty=format:'%h %ar %s'"
-alias gitstatus="git status -s"
-alias gitignore="git ls-files --other --exclude-standard >> .gitignore"
-#alias gitall="for b in `git branch -r | grep -v -- '->'`; do git branch --track ${b##origin/} $b; done git remote update; git fetch --all"
-
-lint ()
-{
-acorn --silent $1
-if [[ $? -eq 0 ]]; then
-	echo -ne "\033[32mNo syntax errors.\033[0m\n"
-fi
-}
-
-# no fun allowed in terminal mode
-alias vim="vim -u NONE -U NONE -N"
-
-# useful
-alias memcacheclear='sudo sh -c "sync; echo 3 > /proc/sys/vm/drop_caches"'
-
-#ssh crap
+# ssh crap
 if [[ "$SSH_AGENT_PID" = "" ]]; then
 	eval $(ssh-agent -s) > /dev/null
 	export SSH_AGENT_PID
@@ -156,74 +14,186 @@ if [ ! $(echo $added_keys | grep -o -e id_rsa) ]; then
 	ssh-add "$HOME/.ssh/id_rsa"
 fi
 
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+# history
+shopt -s histappend
+HISTCONTROL=ignoredups
+HISTSIZE=1000
+HISTFILESIZE=2000
+HISTIGNORE="clear:cls:history:reset"
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
+# keep LINES and COLUMNS up-to-date
+shopt -s checkwinsize
 
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
-fi
-alias angrysearch='python3 /usr/share/angrysearch/angrysearch.py &'
+#
+# go
+#
 
-source ~/git-prompt.sh
-GIT_PS1_SHOWDIRTYSTATE=1
-GIT_PS1_SHOWSTASHSTATE=1
-GIT_PS1_SHOWUNTRACKEDFILES=1
-#GIT_PS1_SHOWUPSTREAM="auto"
-GIT_PS1_SHOWCOLORHINTS=1
-
-if [[ ${EUID} == 0 ]] ; then
-  PROMPT_COMMAND='__git_ps1 "\[\033[01;31m\]\h\[\033[01;34m\] \W\[\033[0m\]" " \[\033[01;31m\]#\[\033[0m\] "'
-else
-  PROMPT_COMMAND='__git_ps1 "\[\033[01;32m\]\u@\h\[\033[01;34m\] \w\[\033[0m\]" " \[\033[01;32m\]\$\[\033[0m\] "'
-fi
-
-#PROMPT_COMMAND='__git_ps1 "\u@\h:\w" "\\\$ "'
-#PS1='\u@\h \W$(__git_ps1 " (%s)") \$ '
-
-pyg() { pygmentize $1 | less -R; }
-localfox() { 
-/opt/firefox/firefox-bin http://[::1]/$1 &
-}
-alias firefox="/opt/firefox/firefox-bin"
-
-export GOPATH="/home/tso/gocode"
-export PATH=$PATH:$GOPATH/bin
-
-alias cls='clear; if [[ $TERM = "linux" ]]; then echo -e "\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                          "; fi; screenfetch; read -n 1 2>/dev/null >/dev/null; clear'
-alias pipes="~/pipes.sh/pipes.sh"
-alias colors="~/rice/colortest1.sh"
-
-. ~/apt-autocomplete.sh
-
+# include go tools in PATH if they aren't there already
 go version 2> /dev/null > /dev/null
 if [ $? ]; then
     export PATH=$PATH:/usr/local/go/bin
 fi
 
+# pretty-print panic tracebacks
+# github.com/maruel/panicparse
+export GOTRACEBACK=all
+panicparse() {
+    last=$(echo `history | tail -n2 | head -n1` | sed 's/[0-9]* //')
+    $last |& pp
+}
+
+#
+# h a c k s
+#
+
+# ** this is a fix for broken behavior **
+# ** with standard disributions of vim **
+# ** arising from incompatibilities    **
+# ** with configuration and plugins    **
+alias vim="vim -u NONE -U NONE -N"
+# ** install neovim on new systems     **
+
+#
+# i n c l u d e s
+#
+
+# various autocompletes
+. ~/bash_completion
+. ~/apt-autocomplete.sh
 . ~/git-autocomplete.sh
 
-export NVM_DIR="/home/tso/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-export PATH=$PATH:~/.rakudobrew/bin:~/.rakudobrew/moar-2015.10/install/share/perl6/site/bin
+# switch to previous directories with ease
+# github.com/rupa/z
+. ~/z/z.sh
 
+# custom prompt with git integration, used instead of PS1=
+. ~/git-prompt.sh
+GIT_PS1_SHOWDIRTYSTATE=1
+GIT_PS1_SHOWSTASHSTATE=1
+GIT_PS1_SHOWUNTRACKEDFILES=1
+#GIT_PS1_SHOWUPSTREAM="auto"
+GIT_PS1_SHOWCOLORHINTS=1
+# this prompt is made to look like gentoo's
+if [[ ${EUID} == 0 ]] ; then
+    PROMPT_COMMAND='__git_ps1 "\[\033[01;31m\]\h\[\033[01;34m\] \W\[\033[0m\]" " \[\033[01;31m\]#\[\033[0m\] "'
+else
+    PROMPT_COMMAND='__git_ps1 "\[\033[01;32m\]\u@\h\[\033[01;34m\] \w\[\033[0m\]" " \[\033[01;32m\]\$\[\033[0m\] "'
+fi
+
+#
+# a l i a s e s
+#
+
+# incredibly useful todo app
+# github.com/sjl/t
 alias t='python ~/t/t.py --task-dir ~/tasks --list tasks'
 
-PATH="/home/tso/perl5/bin${PATH+:}${PATH}"; export PATH;
-PERL5LIB="/home/tso/perl5/lib/perl5${PERL5LIB+:}${PERL5LIB}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/tso/perl5${PERL_LOCAL_LIB_ROOT+:}${PERL_LOCAL_LIB_ROOT}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/tso/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/tso/perl5"; export PERL_MM_OPT;
-source ~/z/z.sh
+# rice
+alias ls='ls --color=always'
+# I don't know where this came from but it's useful af
+alias colors="~/colortest1.sh"
+
+# xkcd.com/1168
+alias untar='tar -xvf'
+alias untgz='tar -xzvf'
+alias tgz='tar -czvf'
+
+# this is useful to prevent swaping on systems without a lot of RAM
+alias memcacheclear='sudo sh -c "sync; echo 3 > /proc/sys/vm/drop_caches"'
+
+# pygmentize does syntax highlighting in the terminal
+# sudo apt install python-pygments
+pyg() {
+    pygmentize $1 | less -R
+}
+
+# check javascript files for syntax errors
+# sudo npm install -g acorn
+lint() {
+    acorn --silent $1
+    if [[ $? -eq 0 ]]; then
+        echo -ne "\033[32mNo syntax errors.\033[0m\n"
+    fi
+}
+
+# these let you start/stop/restart and check the status of your LAMP stack
+alias lamp="sudo service apache2 start; sudo service mysql start"
+alias unlamp="sudo service apache2 stop; sudo service mysql stop"
+alias relamp="sudo service apache2 restart;" 
+# sudo service mysql restart"
+alias lampstat="sudo service apache2 status; sudo service mysql status"
+
+#
+# git
+#
+
+# log in compact, single-line format useful to pipe into wc -l
+alias gitlog="git --no-pager log --pretty=format:'%h %ar %s'"
+
+# status in compact, single-line format
+alias gitstatus="git status -s"
+
+# ignore all currently unstaged files
+gitignore(){
+    dest=".git/info/exclude"
+    if [[ $1 == "--save" ]]; then
+        dest=".gitignore"
+    fi
+    git ls-files --other --exclude-standard >> $(git rev-parse --show-toplevel)/$dest
+}
+
+# no fucks given
+gitcommit() {
+    git add .
+    if [[ $1 ]]; then
+        msg=$(echo $@)
+    	git commit -m "$msg"
+    else
+	    git commit --allow-empty-message -m ''
+    fi
+}
+
+# when git pull just isn't enough
+gitfetch() {
+    git branch -a | grep -v HEAD | perl -ne 'chomp($_); s|^\*?\s*||; if (m|(.+)/(.+)| && not $d{$2}) {print qq(git branch --track $2 $1/$2\n)} else {$d{$_}=1}' | csh -xfs
+    git fetch --all
+}
+
+#
+# chopstick
+#
+if [[ $HOSTNAME -eq "chopstick" ]] ; then 
+    # java-based mysql gui that installed itself in an arbitrary location 
+    alias dbeaver='/usr/share/dbeaver/dbeaver'
+
+    # windows filesharing, for my music collection
+    alias winfs="sudo mount.cifs //192.168.1.3/Music /home/tso/Desktop/Music -o user=Leek; sudo mount.cifs //192.168.1.3/what /home/tso/what -o user=Leek"
+    alias unwinfs="sudo umount -a -t cifs -l"
+
+    # the equivalent of Everything file search for windows, highly recommended
+    # github.com/DoTheEvo/ANGRYsearch
+    alias angrysearch='python3 /usr/share/angrysearch/angrysearch.py &'
+
+    # iceweasel a shit
+    localfox() { 
+        /opt/firefox/firefox-bin http://[::1]/$1 &
+    }
+    alias firefox="/opt/firefox/firefox-bin"
+
+    # I've yet to standardize on a place to put $GOPATH ...
+    export GOPATH="/home/tso/gocode"
+    export PATH=$PATH:$GOPATH/bin
+
+    # poor man's screensavers
+    # github.com/KittyKatt/screenFetch
+    alias cls='reset; screenfetch; read -n 1 2>/dev/null >/dev/null; reset'
+    # github.com/pipeseroni/pipes.sh
+    alias pipes="~/pipes.sh/pipes.sh"
+
+    # nvm (node version manager)
+    export NVM_DIR="/home/tso/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  
+
+    # rvm (ruby version manager)
+    export PATH="$PATH:$HOME/.rvm/bin"
+fi
