@@ -166,7 +166,13 @@ gitfetch() {
 #
 # chopstick
 #
-if [[ $HOSTNAME -eq "chopstick" ]] ; then 
+if [[ $HOSTNAME -eq "chopstick" ]] ; then
+    # bittorrent sync
+    # getsync.com
+    if [[ ! $(pidof btsync) ]]; then
+        ./btsync
+    fi
+
     # java-based mysql gui that installed itself in an arbitrary location 
     alias dbeaver='/usr/share/dbeaver/dbeaver'
 
