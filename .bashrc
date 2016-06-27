@@ -57,8 +57,12 @@ alias vim="vim -u NONE -U NONE -N"
 # i n c l u d e s
 #
 
+. /usr/share/bash-completion/bash_completion
+if [[ $? == 1 ]] ; then 
+    sudo apt-get install bash-completion
+fi
+
 # various autocompletes
-. ~/bash_completion
 . ~/apt-autocomplete.sh
 . ~/git-autocomplete.sh
 
