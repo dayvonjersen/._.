@@ -6,12 +6,12 @@ esac
 
 # ssh crap
 if [[ "$SSH_AGENT_PID" = "" ]]; then
-	eval $(ssh-agent -s) > /dev/null
-	export SSH_AGENT_PID
+    eval $(ssh-agent -s) > /dev/null
+    export SSH_AGENT_PID
 fi
 added_keys=`ssh-add -l`
 if [ ! $(echo $added_keys | grep -o -e id_rsa) ]; then
-	ssh-add "$HOME/.ssh/id_rsa"
+    ssh-add "$HOME/.ssh/id_rsa"
 fi
 
 # history
@@ -29,8 +29,7 @@ shopt -s checkwinsize
 #
 
 # include go tools in PATH if they aren't there already
-go version 2> /dev/null > /dev/null
-if [ $? ]; then
+if [[ ! $(which go) ]]; then
     export PATH=$PATH:/usr/local/go/bin
 fi
 
@@ -138,7 +137,7 @@ alias gitlog="git --no-pager log --pretty=format:'%h %ar %s'"
 alias gitstatus="git status -s"
 
 # ignore all currently unstaged files
-gitignore(){
+gitignore() {
     dest=".git/info/exclude"
     if [[ $1 == "--save" ]]; then
         dest=".gitignore"
@@ -151,9 +150,9 @@ gitcommit() {
     git add .
     if [[ $1 ]]; then
         msg=$(echo $@)
-    	git commit -m "$msg"
+        git commit -m "$msg"
     else
-	    git commit --allow-empty-message -m ''
+        git commit --allow-empty-message -m ''
     fi
 }
 
