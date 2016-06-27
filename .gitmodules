@@ -1,0 +1,3 @@
+[submodule "bin/t"]
+	path = bin/t
+	url = https://github.com/sjl/t

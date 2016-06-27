@@ -1,0 +1,17 @@
+#!/bin/bash
+
+HASH="%C(yellow)%h%C(reset)"
+RELATIVE_TIME="%C(green)%ar%C(reset)"
+AUTHOR="%C(bold blue)%an%C(reset)"
+REFS="%C(red)%d%C(reset)"
+SUBJECT="%<(80,trunc)%s"
+
+FORMAT="$HASH::::::$RELATIVE_TIME::::::$AUTHOR::::::$REFS $SUBJECT"
+
+tmpfile=/r/prettygitlogtmp
+
+function pretty_git_log() {
+	git log --graph --pretty="tformat:$FORMAT" $* > $tmpfile
+    cat $tmpfile | sed 's/\(,\.\*\)\? ago//g' | column -s "::::::" | less -FXRS
+    rm $tmpfile
+}

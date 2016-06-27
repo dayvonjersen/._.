@@ -1,0 +1,21 @@
+[user]
+	email = tso@teknik.io
+	name = tso
+[push]
+	default = simple
+[color]
+    ui = true
+[core]
+    excludesfile = ~/.gitignore
+	editor = gvim
+[mergetool "KDiff3"]
+	path = C:/Program Files (x86)/KDiff3/kdiff3.exe
+	cmd = 'C:/Program Files (x86)/KDiff3/kdiff3.exe' $BASE $LOCAL $REMOTE -o $MERGED
+	trustExitCode = false
+[merge]
+	tool = KDiff3
+[mergetool]
+	keepBackup = false
+[difftool "KDiff3"]
+	path = C:/Program Files (x86)/KDiff3/kdiff3.exe
+	cmd = 'C:/Program Files (x86)/KDiff3/kdiff3.exe' $LOCAL $REMOTE
