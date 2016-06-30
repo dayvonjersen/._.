@@ -163,6 +163,13 @@ gitfetch() {
 }
 
 #
+# r00t
+#
+if [[ $UID -eq 0 ]]; then 
+    export PATH=$PATH:/sbin
+fi
+
+#
 # chopstick
 #
 if [[ $HOSTNAME -eq "chopstick" ]] ; then
