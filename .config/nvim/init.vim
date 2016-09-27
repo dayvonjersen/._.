@@ -6,15 +6,17 @@ Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-markdown'
-Plug 'fatih/vim-go'
-Plug 'nsf/gocode'
+" Plug 'fatih/vim-go'
+Plug 'mdempsky/gocode', { 'rtp': 'nvim' }
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/gv.vim'
 Plug 'shawncplus/phpcomplete.vim'
 Plug 'othree/html5.vim'
-Plug 'scrooloose/syntastic'
+Plug 'othree/eregex.vim'
+" Plug 'scrooloose/syntastic'
 if has("unix")
     Plug 'shougo/deoplete.nvim'
+    Plug 'zchee/deoplete-jedi'
 else
     Plug 'shougo/neocomplete'
 endif
@@ -73,7 +75,7 @@ set modeline
 syntax on
 au BufNewFile,BufRead *.phpt set filetype=php
 
-set foldmethod=syntax
+set foldmethod=manual
 let g:php_folding=2
 set foldlevelstart=20
 
@@ -444,3 +446,4 @@ else
 endif
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
+let g:go_fmt_command = "goimports"

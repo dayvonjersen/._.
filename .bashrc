@@ -32,6 +32,7 @@ shopt -s checkwinsize
 if [[ ! $(which go) ]]; then
     export PATH=$PATH:/usr/local/go/bin
 fi
+export GOROOT=/usr/local/go/
 
 # pretty-print panic tracebacks
 # github.com/maruel/panicparse
@@ -86,6 +87,12 @@ fi
 #
 # a l i a s e s
 #
+
+# SICK OF IT
+murder() {
+    # usage: murder 
+    ps -aux | grep $1 | awk '{print $2}' | xargs kill -9
+}
 
 # incredibly useful todo app
 # github.com/sjl/t
@@ -183,7 +190,7 @@ if [[ $HOSTNAME -eq "chopstick" ]] ; then
     alias dbeaver='/usr/share/dbeaver/dbeaver'
 
     # windows filesharing, for my music collection
-    alias winfs="sudo mount.cifs //192.168.1.3/Music /home/tso/Desktop/Music -o user=Leek; sudo mount.cifs //192.168.1.3/what /home/tso/what -o user=Leek"
+    alias winfs="sudo mount.cifs //192.168.1.2/Music /home/tso/Desktop/Music -o user=Leek; sudo mount.cifs //192.168.1.2/what /home/tso/what -o user=Leek"
     alias unwinfs="sudo umount -a -t cifs -l"
 
     # the equivalent of Everything file search for windows, highly recommended
