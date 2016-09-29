@@ -177,17 +177,25 @@ if [[ $UID -eq 0 ]]; then
 fi
 
 #
-# chopstick
+# common
 #
-if [[ $HOSTNAME -eq "chopstick" ]] ; then
+if [[ $HOSTNAME = "chopstick" || $HOSTNAME = "wok" ]] ; then
     # bittorrent sync
     # getsync.com
     if [[ ! $(pidof btsync) ]]; then
         ./btsync
     fi
+    
+    # github.com/KittyKatt/screenFetch
+    alias cls='reset; screenfetch; read -n 1 2>/dev/null >/dev/null; reset'
+fi
 
-    # java-based mysql gui that installed itself in an arbitrary location 
-    alias dbeaver='/usr/share/dbeaver/dbeaver'
+#
+# chopstick
+#
+if [[ $HOSTNAME = "chopstick" ]] ; then
+    # github.com/pipeseroni/pipes.sh
+    alias pipes="~/pipes.sh/pipes.sh"
 
     # windows filesharing, for my music collection
     alias winfs="sudo mount.cifs //192.168.1.2/Music /home/tso/Desktop/Music -o user=Leek; sudo mount.cifs //192.168.1.2/what /home/tso/what -o user=Leek"
@@ -206,12 +214,6 @@ if [[ $HOSTNAME -eq "chopstick" ]] ; then
     # I've yet to standardize on a place to put $GOPATH ...
     export GOPATH="/home/tso/gocode"
     export PATH=$PATH:$GOPATH/bin
-
-    # poor man's screensavers
-    # github.com/KittyKatt/screenFetch
-    alias cls='reset; screenfetch; read -n 1 2>/dev/null >/dev/null; reset'
-    # github.com/pipeseroni/pipes.sh
-    alias pipes="~/pipes.sh/pipes.sh"
 
     # nvm (node version manager)
     export NVM_DIR="/home/tso/.nvm"
