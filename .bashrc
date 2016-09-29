@@ -9,8 +9,8 @@ if [[ "$SSH_AGENT_PID" = "" ]]; then
     eval $(ssh-agent -s) > /dev/null
     export SSH_AGENT_PID
 fi
-added_keys=`ssh-add -l`
-if [ ! $(echo $added_keys | grep -o -e id_rsa) ]; then
+ssh-add -l 2>&1 >/dev/null
+if [[ $? -eq 1 ]]; then
     ssh-add "$HOME/.ssh/id_rsa"
 fi
 
@@ -188,6 +188,13 @@ if [[ $HOSTNAME = "chopstick" || $HOSTNAME = "wok" ]] ; then
     
     # github.com/KittyKatt/screenFetch
     alias cls='reset; screenfetch; read -n 1 2>/dev/null >/dev/null; reset'
+fi
+
+#
+# wok
+#
+if [[ $HOSTNAME = "wok" ]] ; then
+    export GOPATH=/go
 fi
 
 #
