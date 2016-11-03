@@ -19,6 +19,7 @@ Plug 'mustache/vim-mustache-handlebars'
 Plug 'JulesWang/css.vim'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'hail2u/vim-css3-syntax'
+Plug 'aperezdc/vim-template', { 'branch': 'tso_changes' }
 " Plug 'scrooloose/syntastic'
 if has("unix")
     " Plug 'shougo/deoplete.nvim'
@@ -466,3 +467,35 @@ endif
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 let g:go_fmt_command = "goimports"
+
+" air-line
+let g:airline_powerline_fonts = 1
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" airline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
+
+let g:airline#extensions#tabline#enabled = 1
