@@ -1,3 +1,5 @@
+set nocompatible
+
 call plug#begin('~/.plugged')
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -6,17 +8,21 @@ Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-markdown'
-" Plug 'fatih/vim-go'
+Plug 'fatih/vim-go'
 Plug 'mdempsky/gocode', { 'rtp': 'nvim' }
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/gv.vim'
 Plug 'shawncplus/phpcomplete.vim'
 Plug 'othree/html5.vim'
 Plug 'othree/eregex.vim'
+Plug 'mustache/vim-mustache-handlebars'
+Plug 'JulesWang/css.vim'
+Plug 'cakebaker/scss-syntax.vim'
+Plug 'hail2u/vim-css3-syntax'
 " Plug 'scrooloose/syntastic'
 if has("unix")
-    Plug 'shougo/deoplete.nvim'
-    Plug 'zchee/deoplete-jedi'
+    " Plug 'shougo/deoplete.nvim'
+    " Plug 'zchee/deoplete-jedi'
 else
     Plug 'shougo/neocomplete'
 endif
@@ -31,9 +37,10 @@ if has("win32")
     set guifontwide=M+\ 1m:h12
 endif
 
-colorscheme up
+colorscheme molokai 
+" set cursorline
 set background=dark
-let g:airline_theme="serene"
+let g:airline_theme="molokai"
 set statusline=%!airline#statusline(1}%{fugitive#statusline()}
 
 set autoindent
@@ -41,7 +48,6 @@ set autoindent
 set showmatch
 set matchtime=0
 
-set nocompatible
 set nobackup
 set nowritebackup
 set noundofile
@@ -79,7 +85,7 @@ set foldmethod=manual
 let g:php_folding=2
 set foldlevelstart=20
 
-set number
+" set number
 set linebreak
 
 set guioptions-=m
@@ -89,6 +95,7 @@ set guioptions-=e
 
 set listchars=space:‧,trail:‧,tab:‣‣,extends:…,precedes:…,nbsp:•
 nmap <leader>l :set list!<CR>
+nmap <leader>; :syntax sync fromstart<CR>
 
 nnoremap <F6> :let @/ = ""<CR>
 
@@ -107,6 +114,13 @@ inoremap <C-Space> <Esc>
 noremap <C-Space> <Esc>
 map <PageUp> <C-b>
 map <PgDown> <C-f>
+
+" butterfingers
+nmap :W :w
+nmap :Q :q
+nmap :wQ :wq
+nmap :WQ :wq
+nmap :Wq :wq
 
 " Window Navigation
 map <C-Left> <C-w>h
@@ -265,6 +279,11 @@ function! s:RunShellCommand(cmdline, printout)
     close
   endif
   1
+endfunction
+command! Scratch call s:ScratchBuf()
+function! s:ScratchBuf()
+    enew
+    setlocal buftype=nofile bufhidden=hide noswapfile 
 endfunction
 
 if has("unix")
