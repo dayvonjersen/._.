@@ -19,7 +19,7 @@ Plug 'mustache/vim-mustache-handlebars'
 Plug 'JulesWang/css.vim'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'hail2u/vim-css3-syntax'
-Plug 'aperezdc/vim-template', { 'branch': 'tso_changes' }
+Plug 'generaltso/vim-template', { 'branch': 'tso_changes' }
 " Plug 'scrooloose/syntastic'
 if has("unix")
     " Plug 'shougo/deoplete.nvim'
