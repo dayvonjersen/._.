@@ -68,7 +68,7 @@ fi
 
 # switch to previous directories with ease
 # github.com/rupa/z
-. ~/z/z.sh
+source ~/z/z.sh
 
 # custom prompt with git integration, used instead of PS1=
 . ~/git-prompt.sh
@@ -230,3 +230,6 @@ if [[ $HOSTNAME = "chopstick" ]] ; then
     # rvm (ruby version manager)
     export PATH="$PATH:$HOME/.rvm/bin"
 fi
+# export PATH="~/.pyenv/bin:$PATH"
+# eval "$(pyenv init -)"
+# eval "$(pyenv virtualenv-init -)"

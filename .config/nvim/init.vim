@@ -20,10 +20,11 @@ Plug 'JulesWang/css.vim'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'generaltso/vim-template', { 'branch': 'tso_changes' }
+Plug 'dart-lang/dart-vim-plugin'
 " Plug 'scrooloose/syntastic'
 if has("unix")
-    " Plug 'shougo/deoplete.nvim'
-    " Plug 'zchee/deoplete-jedi'
+     Plug 'shougo/deoplete.nvim'
+     Plug 'zchee/deoplete-jedi'
 else
     Plug 'shougo/neocomplete'
 endif
@@ -37,6 +38,8 @@ if has("win32")
     set guifont=mononoki:h10:cANSI
     set guifontwide=M+\ 1m:h12
 endif
+
+set inccommand=nosplit
 
 colorscheme molokai 
 " set cursorline
@@ -397,6 +400,10 @@ endif
 
 if has("unix")
     let g:deoplete#enable_at_startup = 1
+    " if !exists('g:deoplete#force_omni_input_patterns')
+    "     let g:deoplete#force_omni_input_patterns = {}
+    " endif
+    " let g:deoplete#force_omni_input_patterns.go = '[^.[:digit:] *\t]\.\w*'
 else
     " Use neocomplete.
     let g:neocomplete#enable_at_startup = 1
@@ -498,4 +505,9 @@ let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 
+let g:airline#extensions#tabline#show_buffers = 0 
+let g:airline#extensions#tabline#show_splits = 0 
 let g:airline#extensions#tabline#enabled = 1
+
+" :|
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
