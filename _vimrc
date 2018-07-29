@@ -13,8 +13,8 @@ call plug#begin('~/.plugged')
                              
 "    Plug 'tpope/vim-fugitive'   " the wisdom of master pope
     Plug 'tpope/vim-vinegar'
-    " Plug 'tpope/vim-commentary'
-    Plug 'tomtom/tcomment_vim'
+    Plug 'tpope/vim-commentary'
+    " Plug 'tomtom/tcomment_vim'
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-markdown'   " I don't think I use this one
     
@@ -33,6 +33,7 @@ call plug#begin('~/.plugged')
 
     " Plug 'airblade/vim-gitgutter' " literally just installed this let's see what happens
     Plug 'herrbischoff/cobalt2.vim' " I guess we're putting colors in here now
+    Plug 'noahfrederick/vim-hemisu'
 
     " RIP
     " Plug 'shougo/neocomplete' " could never get completion to work right 
@@ -75,9 +76,12 @@ set guifont=Hack:h9:cANSI
 " let g:airline_theme="papercolor"
 
 " anytime 
-colorscheme cobalt2
-set background=dark
-let g:airline_theme="cobalt2"
+" colorscheme cobalt2
+" set background=dark
+" let g:airline_theme="cobalt2"
+colorscheme hemisu
+set background=light
+let g:airline_theme="sol"
 
 " set statusline=%!airline#statusline(1}%{fugitive#statusline()}
 
@@ -502,5 +506,5 @@ autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
 
 " fix commentstring for c/c++
-autocmd FileType c,Syntax setl commentstring="// %s"
-autocmd FileType cpp,Syntax setl commentstring="// %s"
+autocmd FileType c,Syntax setl commentstring=//\ %s
+autocmd FileType cpp,Syntax setl commentstring=//\ %s
