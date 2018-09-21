@@ -32,6 +32,7 @@ call plug#begin('~/.plugged')
                                 " but I like it so I'm keeping it
 
     " Plug 'airblade/vim-gitgutter' " literally just installed this let's see what happens
+    Plug 'matze/vim-move'
     Plug 'herrbischoff/cobalt2.vim' " I guess we're putting colors in here now
     Plug 'noahfrederick/vim-hemisu'
 
@@ -79,9 +80,15 @@ set guifont=Hack:h9:cANSI
 " colorscheme cobalt2
 " set background=dark
 " let g:airline_theme="cobalt2"
-colorscheme hemisu
-set background=light
-let g:airline_theme="sol"
+
+" v. nice
+" colorscheme hemisu
+" set background=light
+" let g:airline_theme="sol"
+
+" normies ree
+colorscheme molokai
+let g:airline_theme="molokai"
 
 " set statusline=%!airline#statusline(1}%{fugitive#statusline()}
 
@@ -138,6 +145,7 @@ set shortmess=aoOsAI
 set modeline
 syntax on
 au BufNewFile,BufRead *.phpt set filetype=php
+au BufNewFile,BufRead *.phps set filetype=php
 
 set foldmethod=syntax
 let g:php_folding=2
@@ -204,6 +212,7 @@ map <A-8> 8gt
 map <A-9> 9gt
 map <A-0> :tablast<CR>
 map <C-t> :tabnew 
+map <C-n> :tabnew\|tabon!<CR>
 
 command! -complete=shellcmd -nargs=+ Cmd call s:RunShellCommand(<q-args>, 0)
 command! -complete=shellcmd -nargs=+ Cmd2 call s:RunShellCommand(<q-args>, 1)
@@ -491,13 +500,20 @@ endfunction
 " butterfingers
 nmap :E :e
 nmap :W :w
+nmap :we :w
+nmap :We :w
+nmap :WE :w
+nmap :wE :w
 nmap :Q :q
 nmap :wQ :wq
 nmap :WQ :wq
 nmap :Wq :wq
-nmap :gobuild :GoBuild
-nmap :gorun :GoRun
+nmap :gobuild :GoBuild<CR>
+nmap :gb :GoBuild<CR>
+nmap :gorun :GoRun<CR>
+nmap :gr :GoRun<CR>
 nmap :godoc :GoDoc
+nmap :gd :GoDoc
 " set shellpipe=
 nmap :make :make!
 
@@ -508,3 +524,6 @@ autocmd QuickFixCmdPost    l* nested lwindow
 " fix commentstring for c/c++
 autocmd FileType c,Syntax setl commentstring=//\ %s
 autocmd FileType cpp,Syntax setl commentstring=//\ %s
+
+" remove delay for > and < in visual mode
+set ttimeoutlen=0
